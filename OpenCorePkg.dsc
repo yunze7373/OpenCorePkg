@@ -35,6 +35,7 @@
   # REF: https://github.com/acidanthera/bugtracker/issues/754
   BaseMemoryLib|MdePkg/Library/BaseMemoryLibRepStr/BaseMemoryLibRepStr.inf
   BaseRngLib|MdePkg/Library/BaseRngLib/BaseRngLib.inf
+  BaseUcs2Utf8Lib|RedfishPkg/Library/BaseUcs2Utf8Lib/BaseUcs2Utf8Lib.inf
   BcfgCommandLib|ShellPkg/Library/UefiShellBcfgCommandLib/UefiShellBcfgCommandLib.inf
   CpuLib|MdePkg/Library/BaseCpuLib/BaseCpuLib.inf
   DebugLib|OpenCorePkg/Library/OcDebugLogLib/OcDebugLogLib.inf
@@ -145,6 +146,7 @@
   !include NetworkPkg/NetworkLibs.dsc.inc
 
 [Components]
+  Ext4Pkg/Ext4Dxe/Ext4Dxe.inf
   MdeModulePkg/Bus/Pci/NvmExpressDxe/NvmExpressDxe.inf {
     <LibraryClasses>
       !if $(TARGET) == RELEASE

@@ -156,6 +156,7 @@ package() {
       "NvmExpressDxe.efi"
       "AudioDxe.efi"
       "CrScreenshotDxe.efi"
+      "Ext4Dxe.efi"
       "OpenCanopy.efi"
       "OpenLinuxBoot.efi"
       "OpenPartitionDxe.efi"
