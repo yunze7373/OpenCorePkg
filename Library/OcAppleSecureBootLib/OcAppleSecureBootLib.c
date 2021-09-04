@@ -861,10 +861,11 @@ AppleSbVerifyWindows (
 
 APPLE_SECURE_BOOT_PROTOCOL *
 OcAppleSecureBootInstallProtocol (
-  IN BOOLEAN  Reinstall,
-  IN UINT8    SbPolicy,
-  IN UINT8    SbWinPolicy OPTIONAL,
-  IN BOOLEAN  SbWinPolicyValid
+  IN CONST CHAR8  *SecureBootModel,
+  IN BOOLEAN      Reinstall,
+  IN UINT8        SbPolicy,
+  IN UINT8        SbWinPolicy OPTIONAL,
+  IN BOOLEAN      SbWinPolicyValid
   )
 {
   STATIC APPLE_SECURE_BOOT_PROTOCOL SecureBoot = {
@@ -923,23 +924,25 @@ OcAppleSecureBootInstallProtocol (
   mSbWindowsPolicy      = SbWinPolicy;
   mSbWindowsPolicyValid = SbWinPolicyValid;
 
-  DataSize = sizeof (SbPolicy);
-  gRT->SetVariable (
-          L"AppleSecureBootPolicy",
-          &gAppleSecureBootVariableGuid,
-          EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
-          DataSize,
-          &SbPolicy
-          );
-  if (SbWinPolicyValid) {
-    DataSize = sizeof (SbWinPolicy);
+  if (AsciiStrCmp (SecureBootModel, "x86legacy") != 0) {
+    DataSize = sizeof (SbPolicy);
     gRT->SetVariable (
-           L"AppleSecureBootWindowsPolicy",
-           &gAppleSecureBootVariableGuid,
-           EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
-           DataSize,
-           &SbWinPolicy
-           );
+            L"AppleSecureBootPolicy",
+            &gAppleSecureBootVariableGuid,
+            EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+            DataSize,
+            &SbPolicy
+            );
+    if (SbWinPolicyValid) {
+      DataSize = sizeof (SbWinPolicy);
+      gRT->SetVariable (
+             L"AppleSecureBootWindowsPolicy",
+             &gAppleSecureBootVariableGuid,
+             EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+             DataSize,
+             &SbWinPolicy
+             );
+    }
   }
 
   return &SecureBoot;

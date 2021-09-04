@@ -481,6 +481,7 @@ OcLoadAppleSecureBoot (
   // TODO: Do we need to make Windows policy configurable?
   //
   SecureBoot = OcAppleSecureBootInstallProtocol (
+    RealSecureBootModel,
     Config->Uefi.ProtocolOverrides.AppleSecureBoot,
     SecureBootPolicy,
     0,

@@ -33,6 +33,7 @@ OcAppleSecureBootBootstrapValues (
 /**
   Install and initialise the Apple Secure Boot protocol.
 
+  @param[in] SecureBootModel    Secure Boot model.
   @param[in] Reinstall          Replace any installed protocol.
   @param[in] SbPolicy           Apple Secure Boot Policy to install.
   @param[in] SbWinPolicy        Apple Secure Boot Windows Policy to install.
@@ -43,10 +44,11 @@ OcAppleSecureBootBootstrapValues (
 **/
 APPLE_SECURE_BOOT_PROTOCOL *
 OcAppleSecureBootInstallProtocol (
-  IN BOOLEAN  Reinstall,
-  IN UINT8    SbPolicy,
-  IN UINT8    SbWinPolicy OPTIONAL,
-  IN BOOLEAN  SbWinPolicyValid
+  IN CONST CHAR8  *SecureBootModel,
+  IN BOOLEAN      Reinstall,
+  IN UINT8        SbPolicy,
+  IN UINT8        SbWinPolicy OPTIONAL,
+  IN BOOLEAN      SbWinPolicyValid
   );
 
 /**
