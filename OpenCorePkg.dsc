@@ -146,7 +146,10 @@
   !include NetworkPkg/NetworkLibs.dsc.inc
 
 [Components]
-  Ext4Pkg/Ext4Dxe/Ext4Dxe.inf
+  Ext4Pkg/Ext4Dxe/Ext4Dxe.inf {
+    <LibraryClasses>
+      DebugLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
+  }
   MdeModulePkg/Bus/Pci/NvmExpressDxe/NvmExpressDxe.inf {
     <LibraryClasses>
       !if $(TARGET) == RELEASE
